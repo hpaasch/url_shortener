@@ -14,9 +14,9 @@
 
                 <a class="btn btn-primary btn-sm" href="{% url 'index_view' %}">Home</a>
                 <a class="btn btn-primary btn-sm" href="{% url 'logout_view' %}">Logout</a>
-                <a class="btn btn-primary btn-sm" href="#">Something</a>
-                <p class="navbar-text navbar-right">Signed in as <a href="#"
-                                                                    class="navbar-link">USERNAME</a></p>
+                <a class="btn btn-primary btn-sm" href="{% url 'account_view' %}">View Bookmarks/Account</a>
+                <p class="navbar-text navbar-right">Signed in as <a href="{% url 'account_view' %}"
+                                                                    class="navbar-link">{{ request.user }}</a></p>
 
                 <a class="btn btn-primary btn-sm" href="{% url 'register_view' %}">Register</a>
                 <a class="btn btn-primary btn-sm" href="{% url 'login_view' %}">Sign in</a>
