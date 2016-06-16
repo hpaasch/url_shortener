@@ -17,3 +17,6 @@ class RegisterView(CreateView):
 
 class AccountView(ListView):
     model = User
+
+
+

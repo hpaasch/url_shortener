@@ -13,7 +13,7 @@
         <div class="container">
 
                 <a class="btn btn-primary btn-sm" href="{% url 'index_view' %}">Home</a>
-                <a class="btn btn-primary btn-sm" href="{% url 'logout_view' %}">Logout</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'logout_view' %}?next={% url 'login_view' %}">Logout</a>
                 <a class="btn btn-primary btn-sm" href="{% url 'account_view' %}">View Bookmarks/Account</a>
                 <p class="navbar-text navbar-right">Signed in as <a href="{% url 'account_view' %}"
                                                                     class="navbar-link">{{ request.user }}</a></p>
