@@ -5,21 +5,22 @@
 <head>
     <meta charset="UTF-8">
     <title>HEPurl</title>
-
+    <link rel="stylesheet" href="{% static 'shortener_app/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'shortener_app/css/main.css' %}">
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-static-top">
         <div class="container">
-            {% if request.user.is_authenticated %}
-                <a class="btn btn-primary btn-sm" href="#">Something</a>
-                <a class="btn btn-primary btn-sm" href="#">Logout</a>
+
+                <a class="btn btn-primary btn-sm" href="{% url 'index_view' %}">Home</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'logout_view' %}">Logout</a>
                 <a class="btn btn-primary btn-sm" href="#">Something</a>
                 <p class="navbar-text navbar-right">Signed in as <a href="#"
                                                                     class="navbar-link">USERNAME</a></p>
-            {% else %}
-                <a class="btn btn-primary btn-sm" href="#">Register</a>
-                <a class="btn btn-primary btn-sm" href="#">Sign in</a>
-            {% endif %}
+
+                <a class="btn btn-primary btn-sm" href="{% url 'register_view' %}">Register</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'login_view' %}">Sign in</a>
+
         </div>
     </nav>
     <div class="container">
