@@ -8,6 +8,13 @@
 
 <h4> soon this will show a list of URLs for:</h4>
 <h4>{{ request.user.username }} </h4>
+<p>but for now just create a bookmark</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="create bookmark" >
+    </form>
+
     {% for object in object_list %}
         {{ object }}  <!-- shows user list. not click entries. -->
     {% endfor %}
