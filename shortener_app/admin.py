@@ -1,6 +1,6 @@
 from django.contrib import admin
 
 # Register your models here.
-from shortener_app.models import Click
+from shortener_app.models import Bookmark
 
-admin.site.register(Click)
+admin.site.register(Bookmark)
