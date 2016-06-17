@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.db import models
 
 # Create your models here.
@@ -18,6 +19,9 @@ class Bookmark(models.Model):
 
     class Meta:
         ordering = ['-created']
+
+    def get_absolute_url(self):
+        return reverse('account_view')
 
 
 class Click(models.Model):

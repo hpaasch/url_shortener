@@ -26,5 +26,9 @@ class BookmarkCreateView(CreateView):
     fields = ['url', 'title', 'description', 'private']
     template_name = 'auth/user_list.html'
 
-    def 
+    def form_valid(self, form):
+        form.instance.url_user = self.request.user
+        # bookmark = form.save(commit=False)
+        # bookmark.created_by = self.request.user
+        return super(BookmarkCreateView, self).form_valid(form)
 
