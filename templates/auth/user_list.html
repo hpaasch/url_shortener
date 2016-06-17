@@ -7,7 +7,9 @@
 
 
 <h4> soon this will show a list of URLs for:</h4>
-<h4>{{ request.user.first_name }} {{ request.user.last_name }}</h4>
-
+<h4>{{ request.user.username }} </h4>
+    {% for object in object_list %}
+        {{ object }}  <!-- shows user list. not click entries. -->
+    {% endfor %}
 
 {% endblock %}
