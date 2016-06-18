@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block head %}
         <meta http-equiv="refresh" content="4; url={{ short_code }}"/>
 {% endblock %}
@@ -7,15 +6,14 @@
 {% block content %}
 <div class="page-header">
         <h1>Track 'n' Share<small>  Save your favorite links, shortly.</small></h1>
-    </div>
-
-
+</div>
 <h4>Howdy, {{ request.user.username }}. you'll be able to Update or Delete on this Account/Profile page i hope.</h4>
 
 <ol>
     {% for object in author_list %}
         <li>{{ object.title }} -- <a href="{% url 'redirect_view' object.short_code %}">{{ object.short_code }} </a>--
-            {% if object.private == True %}Private {% else %}Public {% endif %} {{ object.created }} {{ object.url_user }}
+            {% if object.private == True %}Private {% else %}Public {% endif %}
+            {{ object.created }} {{ object.url_user }} {{ object.count }} Update
         </li>
     {% endfor %}
     </ol>

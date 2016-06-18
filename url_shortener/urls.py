@@ -8,14 +8,15 @@ from shortener_app import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.IndexView.as_view(), name='index_view'),  # needs to show objects from db
-    url(r'^register_view/$', views.RegisterView.as_view(), name='register_view'),
-    url(r'^login_view/$', login, name='login_view'),
-    url(r'^accounts/profile/$', views.AccountView.as_view(), name='account_view'),
-    url(r'^accounts/profile/clicks/$', views.ClickView.as_view(), name='click_view'),
-    url(r'^bookmark/create/$', views.BookmarkCreateView.as_view(), name='bookmark_view'),
-    url(r'^logout_view/$', logout, name='logout_view'),
-    url(r'^detail/$', views.LinkDetailView.as_view(), name='detail_view'),
-    url(r'^(?P<short_code>\w+)/$', views.LinkRedirectView.as_view(), name='redirect_view')
-
+    url(r'^$', views.IndexView.as_view(), name='index_view'),  # shows public links for everyone
+    url(r'^register_view/$', views.RegisterView.as_view(), name='register_view'),  # register new user
+    url(r'^login_view/$', login, name='login_view'),  # login existing user
+    url(r'^accounts/profile/$', views.AccountView.as_view(), name='account_view'),  # all of user's links
+    url(r'^accounts/profile/clicks/$', views.ClickView.as_view(), name='click_view'),  # not used?
+    url(r'^bookmark/create/$', views.BookmarkCreateView.as_view(), name='bookmark_view'),  # bookmark form
+    url(r'^logout_view/$', logout, name='logout_view'),  # logout
+    url(r'^detail/$', views.LinkDetailView.as_view(), name='detail_view'),  # not used?
+    url(r'^(?P<short_code>\w+)/$', views.LinkRedirectView.as_view(), name='redirect_view'),  # redirected and counted
+    url(r'^xxxxx/$', views.BookmarkUpdate.as_view(), name='update_view'),  # update bookmark
+    url(r'^xxxxx/$', views.BookmarkDelete.as_view(), name='delete_view')  # delete bookmark
 ]

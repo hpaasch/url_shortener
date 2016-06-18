@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import RedirectView, TemplateView, CreateView, ListView
+from django.views.generic import RedirectView, TemplateView, CreateView, ListView, UpdateView
 from hashids import Hashids
 import datetime
 
@@ -62,6 +62,15 @@ class BookmarkCreateView(CreateView):
         # form.instance = form.save()  # seems not to be needed
         return super(BookmarkCreateView, self).form_valid(form)
 
+
+class BookmarkUpdate(UpdateView):
+    model = Bookmark
+    fields = ['url', 'title', 'description']
+    template_name_suffix = '_update_form'
+    template_name = 'bookmark_update.html'
+
+
+# below is dead code so far. i think
 
 class LinkDetailView(TemplateView):
     template_name = 'auth/user_list.html'
