@@ -8,8 +8,14 @@
 <h3>Bookmark your favorite links and easily share them with others</h3>
     <p>Our system allows you to share publicly, or keep your links as a private collection.</p>
     <p>We also obfuscate the URL and track its use. </p>
-    <p>Click HERE for a list of public URLs.</p>
+    <p>This will show a full list of all public URLs. People can click or copy. Eventually.</p>
 
-
+<ol>
+    {% for object in public_list %}
+        <li>{{ object.title }} -- <a href="{{ object.url }}">{{ object.short_code }} </a>--
+             {{ object.created }} {{ object.url_user }}
+        </li>
+    {% endfor %}
+    </ol>
 
 {% endblock %}

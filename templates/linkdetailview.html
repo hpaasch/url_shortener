@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+ <ol>
+    {% for object in author_list %}
+        <li>{{ object.title }} -- <a href="{{ object.url }}">{{ object.short_code }} </a>--
+            {% if object.private == True %}Private {% else %}Public {% endif %} {{ object.created }}</li>
+    {% endfor %}
+    </ol>
+
+{% endblock %}

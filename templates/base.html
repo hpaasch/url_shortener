@@ -13,16 +13,20 @@
 <body>
     <nav class="navbar navbar-inverse navbar-static-top">
         <div class="container">
-
-                <a class="btn btn-primary btn-sm" href="{% url 'index_view' %}">Home</a>
-                <a class="btn btn-primary btn-sm" href="{% url 'account_view' %}">View Bookmarks/Account</a>
+            {% if request.user.is_authenticated %}
+                <a class="btn btn-primary btn-sm" href="{% url 'index_view' %}">All public links</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'account_view' %}">View Account</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'detail_view' %}">View Bookmarks</a>
                 <a class="btn btn-primary btn-sm" href="{% url 'bookmark_view' %}">Create new bookmark</a>
-                <a class="btn btn-primary btn-sm" href="{% url 'register_view' %}">Register</a>
-                <a class="btn btn-primary btn-sm" href="{% url 'login_view' %}">Sign in</a>
                 <a class="btn btn-primary btn-sm" href="{% url 'logout_view' %}?next={% url 'login_view' %}">Logout</a>
                 <p class="navbar-text navbar-right">Signed in as <a href="{% url 'account_view' %}"
                                                                     class="navbar-link">{{ request.user }}</a></p>
+            {% else %}
+                <a class="btn btn-primary btn-sm" href="{% url 'index_view' %}">Home</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'register_view' %}">Register</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'login_view' %}">Sign in</a>
 
+            {% endif %}
 
         </div>
     </nav>

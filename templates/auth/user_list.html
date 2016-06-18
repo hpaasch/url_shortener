@@ -10,12 +10,13 @@
     </div>
 
 
-<h4>Howdy, {{ request.user.username }}. These are your saved bookmarks. Update or Delete whatever you want. </h4>
+<h4>Howdy, {{ request.user.username }}. you'll be able to Update or Delete on this Account/Profile page i hope.</h4>
 
-    <ol>
+<ol>
     {% for object in author_list %}
         <li>{{ object.title }} -- <a href="{{ object.url }}">{{ object.short_code }} </a>--
-            {% if object.private == True %}Private {% else %}Public {% endif %} {{ object.created }}</li>
+            {% if object.private == True %}Private {% else %}Public {% endif %} {{ object.created }} {{ object.url_user }}
+        </li>
     {% endfor %}
     </ol>
 

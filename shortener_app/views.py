@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import View, TemplateView, CreateView, ListView
+from django.views.generic import RedirectView, TemplateView, CreateView, ListView
 from hashids import Hashids
 
 from shortener_app.models import Bookmark, Click
@@ -11,11 +11,30 @@ from shortener_app.models import Bookmark, Click
 class IndexView(TemplateView):
     template_name = 'index_view.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['public_list'] = Bookmark.objects.filter(private__exact=False)
+        return context
+
+
+class LinkRedirectView(RedirectView):
+    template_name = 'auth/user_list.html'
+    query_string = True
+    pattern_name = 'detail_view'
+
+    def get_context_data(self, **kwargs):
+        context = super(LinkRedirectView, self).get_context_data(**kwargs)
+        hashids = Hashids(min_length=8, salt='msnstjtnst')
+        context['short_code'] = Bookmark.objects.get(pk=self.kwargs.get('short_code', None))
+        decode = hashids.decode('short_code')
+        context['short_code'] = decode
+        return context
+
 
 class RegisterView(CreateView):
     model = User
     form_class = UserCreationForm
-    success_url = "/"  # back to homepage/index view
+    success_url = "/login_view/"
 
 
 class AccountView(ListView):  # can this show a list of URLs?
@@ -23,7 +42,7 @@ class AccountView(ListView):  # can this show a list of URLs?
 
     def get_context_data(self, **kwargs):
         context = super(AccountView, self).get_context_data(**kwargs)
-        context['author_list'] = Bookmark.objects.all()
+        context['author_list'] = Bookmark.objects.filter(url_user__username=self.request.user)
         return context
 
 
@@ -41,14 +60,14 @@ class BookmarkCreateView(CreateView):
         return super(BookmarkCreateView, self).form_valid(form)
 
 
-class RedirectURLView(TemplateView):
+class LinkDetailView(TemplateView):
     template_name = 'auth/user_list.html'
 
     def get_context_data(self, **kwargs):
-        context = super(RedirectURLView, self).get_context_data(**kwargs)
-        hashids = Hashids(min_length=8, salt='msnstjtnst')
-        context['short_code'] = Bookmark.objects.get(pk=self.kwargs.get('short_code', None))
-        decode = hashids.decode('short_code')
-        context['short_code'] = decode
+        context = super(LinkDetailView, self).get_context_data(**kwargs)
+        context['author_list'] = Bookmark.objects.all()
         return context
+
+
+
 
