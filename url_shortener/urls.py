@@ -12,8 +12,10 @@ urlpatterns = [
     url(r'^register_view/$', views.RegisterView.as_view(), name='register_view'),
     url(r'^login_view/$', login, name='login_view'),
     url(r'^accounts/profile/$', views.AccountView.as_view(), name='account_view'),
+    url(r'^accounts/profile/clicks/$', views.ClickView.as_view(), name='click_view'),
     url(r'^bookmark/create/$', views.BookmarkCreateView.as_view(), name='bookmark_view'),
     url(r'^logout_view/$', logout, name='logout_view'),
     url(r'^detail/$', views.LinkDetailView.as_view(), name='detail_view'),
     url(r'^(?P<short_code>\w+)/$', views.LinkRedirectView.as_view(), name='redirect_view')
+
 ]

@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import RedirectView, TemplateView, CreateView, ListView
 from hashids import Hashids
+import datetime
 
 from shortener_app.models import Bookmark, Click
 
@@ -25,9 +26,11 @@ class LinkRedirectView(RedirectView):
     def get(self, request, *args, **kwargs):
         short_code = self.kwargs.get('short_code', None)
         link_url = Bookmark.objects.get(short_code=short_code)
+        # link_url = Bookmark.objects.get(pk=self.kwargs.get('short_code', None))
         self.url = link_url.url
-        # context['short_code'] = Bookmark.objects.get(pk=self.kwargs.get('short_code', None))
-        # return context
+        link_url.count += 1
+        link_url.save()
+        Click.objects.create(url=link_url, click_time=datetime.datetime.now())
         return super(LinkRedirectView, self).get(request, args, **kwargs)
 
 
@@ -67,6 +70,10 @@ class LinkDetailView(TemplateView):
         context = super(LinkDetailView, self).get_context_data(**kwargs)
         context['author_list'] = Bookmark.objects.all()
         return context
+
+
+class ClickView(ListView):
+    pass
 
 
 

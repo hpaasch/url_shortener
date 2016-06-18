@@ -11,6 +11,7 @@ class Bookmark(models.Model):
     url_user = models.ForeignKey(User)
     short_code = models.CharField(max_length=25)
     private = models.BooleanField()
+    count = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -24,8 +25,10 @@ class Bookmark(models.Model):
 
 class Click(models.Model):
     url = models.ForeignKey(Bookmark)
-    url_user = models.ForeignKey(User)
-    click_time = models.DateTimeField(auto_now_add=True)  # or just auto_now?
+    click_time = models.DateTimeField()  # or auto_now?
 
     class Meta:
         ordering = ['-click_time']
+
+    def __str__(self):
+        return self.url.title

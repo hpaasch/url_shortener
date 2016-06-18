@@ -14,7 +14,7 @@
 
 <ol>
     {% for object in author_list %}
-        <li>{{ object.title }} -- <a href="{{ object.url }}">{{ object.short_code }} </a>--
+        <li>{{ object.title }} -- <a href="{% url 'redirect_view' object.short_code %}">{{ object.short_code }} </a>--
             {% if object.private == True %}Private {% else %}Public {% endif %} {{ object.created }} {{ object.url_user }}
         </li>
     {% endfor %}
