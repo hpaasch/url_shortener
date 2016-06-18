@@ -21,11 +21,16 @@ class RegisterView(CreateView):
 class AccountView(ListView):  # can this show a list of URLs?
     model = User
 
+    def get_context_data(self, **kwargs):
+        context = super(AccountView, self).get_context_data(**kwargs)
+        context['author_list'] = Bookmark.objects.all()
+        return context
+
 
 class BookmarkCreateView(CreateView):
     model = Bookmark
     fields = ['url', 'title', 'description', 'private']
-    template_name = 'auth/user_list.html'
+    template_name = 'bookmark_create.html'
 
     def form_valid(self, form):
         form.instance = form.save(commit=False)

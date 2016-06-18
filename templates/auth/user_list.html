@@ -6,17 +6,12 @@
     </div>
 
 
-<h4> soon this will show a list of URLs for:</h4>
-<h4>{{ request.user.username }} </h4>
-<p>but for now just create a bookmark</p>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="create bookmark" >
-    </form>
+<h4>Howdy, {{ request.user.username }}. These are your saved bookmarks. Update or Delete whatever you want. </h4>
 
-    {% for object in object_list %}
-        {{ object }}  <!-- shows user list. not click entries. -->
+    <ol>
+    {% for object in author_list %}
+        <li>{{ object.title }} -- <a href="{{ object.url }}">{{ object.short_code }} </a>--
+            {% if object.private == True %}Private {% else %}Public {% endif %} {{ object.created }}</li>
     {% endfor %}
-
+    </ol>
 {% endblock %}
