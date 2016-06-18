@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import View, TemplateView, CreateView, ListView
+from hashids import Hashids
 
 from shortener_app.models import Bookmark, Click
 
@@ -17,7 +18,7 @@ class RegisterView(CreateView):
     success_url = "/"  # back to homepage/index view
 
 
-class AccountView(ListView):
+class AccountView(ListView):  # can this show a list of URLs?
     model = User
 
 
@@ -27,8 +28,12 @@ class BookmarkCreateView(CreateView):
     template_name = 'auth/user_list.html'
 
     def form_valid(self, form):
+        form.instance = form.save(commit=False)
         form.instance.url_user = self.request.user
-        # bookmark = form.save(commit=False)
-        # bookmark.created_by = self.request.user
+        hashids = Hashids(min_length=8, salt='msnstjtnst')
+        form.instance.short_code = hashids.encode(id(form.instance))
+        # form.instance = form.save()  # seems not to be needed
         return super(BookmarkCreateView, self).form_valid(form)
+
+
 
