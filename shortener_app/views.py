@@ -18,17 +18,17 @@ class IndexView(TemplateView):
 
 
 class LinkRedirectView(RedirectView):
-    template_name = 'auth/user_list.html'
-    query_string = True
-    pattern_name = 'detail_view'
+    # template_name = 'auth/user_list.html'
+    # query_string = True
+    # pattern_name = 'detail_view'
 
-    def get_context_data(self, **kwargs):
-        context = super(LinkRedirectView, self).get_context_data(**kwargs)
-        hashids = Hashids(min_length=8, salt='msnstjtnst')
-        context['short_code'] = Bookmark.objects.get(pk=self.kwargs.get('short_code', None))
-        decode = hashids.decode('short_code')
-        context['short_code'] = decode
-        return context
+    def get(self, request, *args, **kwargs):
+        short_code = self.kwargs.get('short_code', None)
+        link_url = Bookmark.objects.get(short_code=short_code)
+        self.url = link_url.url
+        # context['short_code'] = Bookmark.objects.get(pk=self.kwargs.get('short_code', None))
+        # return context
+        return super(LinkRedirectView, self).get(request, args, **kwargs)
 
 
 class RegisterView(CreateView):

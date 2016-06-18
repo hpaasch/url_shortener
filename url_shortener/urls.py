@@ -15,5 +15,5 @@ urlpatterns = [
     url(r'^bookmark/create/$', views.BookmarkCreateView.as_view(), name='bookmark_view'),
     url(r'^logout_view/$', logout, name='logout_view'),
     url(r'^detail/$', views.LinkDetailView.as_view(), name='detail_view'),
-    url(r'^b/(?P<short_code>\w+)/$', views.LinkRedirectView.as_view(), name='redirect_view')
+    url(r'^(?P<short_code>\w+)/$', views.LinkRedirectView.as_view(), name='redirect_view')
 ]
