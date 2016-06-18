@@ -41,4 +41,14 @@ class BookmarkCreateView(CreateView):
         return super(BookmarkCreateView, self).form_valid(form)
 
 
+class RedirectURLView(TemplateView):
+    template_name = 'auth/user_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(RedirectURLView, self).get_context_data(**kwargs)
+        hashids = Hashids(min_length=8, salt='msnstjtnst')
+        context['short_code'] = Bookmark.objects.get(pk=self.kwargs.get('short_code', None))
+        decode = hashids.decode('short_code')
+        context['short_code'] = decode
+        return context
 

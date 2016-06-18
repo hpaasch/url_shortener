@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^accounts/profile/$', views.AccountView.as_view(), name='account_view'),
     url(r'^bookmark/create/$', views.BookmarkCreateView.as_view(), name='bookmark_view'),
     url(r'^logout_view/$', logout, name='logout_view'),
+    url(r'^b/(?P<short_code>\w+)/$', views.RedirectURLView.as_view(), name='redirect_view')
 ]
