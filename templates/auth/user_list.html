@@ -13,7 +13,10 @@
     {% for object in author_list %}
         <li>{{ object.title }} -- <a href="{% url 'redirect_view' object.short_code %}">{{ object.short_code }} </a>--
             {% if object.private == True %}Private {% else %}Public {% endif %}
-            {{ object.created }} {{ object.url_user }} {{ object.count }} Update
+            {{ object.created }} {{ object.url_user }} {{ object.count }}
+            <a href="{% url 'update_view' object.pk %}">Update</a>
+            <a href="{% url 'delete_view' object.pk %}">Delete</a>
+
         </li>
     {% endfor %}
     </ol>

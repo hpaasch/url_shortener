@@ -1,8 +1,9 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import RedirectView, TemplateView, CreateView, ListView, UpdateView
+from django.views.generic import RedirectView, TemplateView, CreateView, ListView, UpdateView, DeleteView
 from hashids import Hashids
 import datetime
 
@@ -66,9 +67,13 @@ class BookmarkCreateView(CreateView):
 class BookmarkUpdate(UpdateView):
     model = Bookmark
     fields = ['url', 'title', 'description']
-    template_name_suffix = '_update_form'
+    template_name_suffix = '_update_form'  # is this needed?
     template_name = 'bookmark_update.html'
 
+
+class BookmarkDelete(DeleteView):
+    model = Bookmark
+    success_url = reverse_lazy('account_view')
 
 # below is dead code so far. i think
 
