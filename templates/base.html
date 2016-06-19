@@ -15,8 +15,7 @@
         <div class="container">
             {% if request.user.is_authenticated %}
                 <a class="btn btn-primary btn-sm" href="{% url 'index_view' %}">All public links</a>
-                <a class="btn btn-primary btn-sm" href="{% url 'account_view' %}">View Account</a>
-                <a class="btn btn-primary btn-sm" href="{% url 'detail_view' %}">View Bookmarks</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'account_view' %}">View {{ request.user }}'s links</a>
                 <a class="btn btn-primary btn-sm" href="{% url 'bookmark_view' %}">Create new bookmark</a>
                 <a class="btn btn-primary btn-sm" href="{% url 'logout_view' %}?next={% url 'login_view' %}">Logout</a>
                 <p class="navbar-text navbar-right">Signed in as <a href="{% url 'account_view' %}"
@@ -36,6 +35,11 @@
         {% block content %}
         {% endblock %}
     </div>
+    <div class="container">
+        {% block pagination %}
+        {% endblock %}
+    </div>
+
 
 </body>
 </html>

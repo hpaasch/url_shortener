@@ -5,17 +5,54 @@
     <div class="page-header">
         <h1>Track 'n' Share<small>  Save your favorite links, shortly.</small></h1>
     </div>
-<h3>Bookmark your favorite links and easily share them with others</h3>
-    <p>Our system allows you to share publicly, or keep your links as a private collection.</p>
-    <p>We also obfuscate the URL and track its use. </p>
-    <p>This will show a full list of all public URLs. People can click or copy. Eventually.</p>
+    <h3>Bookmark your favorite links and easily share them with others</h3>
+        <p>Our system allows you to share publicly, or keep your links as a private collection.</p>
+        <p>We also obfuscate the URL and track its use. </p>
+        <p>This will show a full list of all public URLs. People can click or copy. Eventually.</p>
 
-<ol>
-    {% for object in public_list %}
-        <li>{{ object.title }} -- <a href="{% url 'redirect_view' object.short_code %}">{{ object.short_code }} </a>--
-             {{ object.created }} {{ object.url_user }}
+    <table id="public">
+        {% for bookmark in public_bookmarks %}
+            <tr>
+                <td>{{ bookmark.title }}</td>
+                <td><a href="{% url 'redirect_view' bookmark.short_code %}">{{ bookmark.short_code }} </a></td>
+                <td>{{ bookmark.description|truncatewords:7 }}</td>
+                <td>created: {{ bookmark.created }}</td>
+                <td>added by: {{ bookmark.url_user }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+    <ul class="pagination">
+    {% if public_bookmarks.has_previous %}
+        <li>
+            <span><a href="?page={{ public_bookmarks.previous_page_number }}">Previous</a></span>
         </li>
-    {% endfor %}
-    </ol>
+    {% endif %}
+        <li class="">
+            <span>Page {{ public_bookmarks.number }} of {{ public_bookmarks.paginator.num_pages }}</span>
+        </li>
+    {% if public_bookmarks.has_next %}
+        <li>
+            <span><a href="?page={{ public_bookmarks.next_page_number }}">Next</a></span>
+        </li>
+    {% endif %}
+    </ul>
 
+{% endblock %}
+{% block pagination %}
+
+<nav>
+  <ul class="pagination">
+    <li class="disabled">
+        <span aria-hidden="true">&laquo</span>
+    </li>
+       <li class="active">
+      <span>1 <span class="sr-only">(current)</span></span>
+    </li>
+       <li class="active">
+      <span>2 <span class="sr-only">(current)</span></span>
+    </li>
+  </ul>
+</nav>
 {% endblock %}
