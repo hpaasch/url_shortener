@@ -4,11 +4,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>HEPurl</title>
+    <title>Track-n-Share</title>
     <link rel="stylesheet" href="{% static 'shortener_app/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'shortener_app/css/main.css' %}">
-    {% block head %}
-    {% endblock %}
+{#    {% block head %}#}
+{#    {% endblock %}#}
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-static-top">
@@ -18,28 +18,20 @@
                 <a class="btn btn-primary btn-sm" href="{% url 'account_view' %}">View {{ request.user }}'s links</a>
                 <a class="btn btn-primary btn-sm" href="{% url 'bookmark_view' %}">Create new bookmark</a>
                 <a class="btn btn-primary btn-sm" href="{% url 'logout_view' %}?next={% url 'login_view' %}">Logout</a>
-                <p class="navbar-text navbar-right">Signed in as <a href="{% url 'account_view' %}"
-                                                                    class="navbar-link">{{ request.user }}</a></p>
+                <p class="navbar-text navbar-right">Signed in as <a href="{% url 'account_view' %}" class="navbar-link">{{ request.user }}</a></p>
             {% else %}
                 <a class="btn btn-primary btn-sm" href="{% url 'index_view' %}">Home</a>
                 <a class="btn btn-primary btn-sm" href="{% url 'register_view' %}">Register</a>
                 <a class="btn btn-primary btn-sm" href="{% url 'login_view' %}">Sign in</a>
-
             {% endif %}
-
         </div>
     </nav>
-
-    <!-- move header to here if it really stays the same on all pages -->
+    <div class="page-header">
+        <h1>Track-n-Share<small>  Stockpile your favorite links.</small></h1>
+    </div>
     <div class="container">
         {% block content %}
         {% endblock %}
     </div>
-    <div class="container">
-        {% block pagination %}
-        {% endblock %}
-    </div>
-
-
 </body>
 </html>

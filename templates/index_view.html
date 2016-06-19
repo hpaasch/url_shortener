@@ -2,57 +2,51 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="page-header">
-        <h1>Track 'n' Share<small>  Save your favorite links, shortly.</small></h1>
-    </div>
-    <h3>Bookmark your favorite links and easily share them with others</h3>
-        <p>Our system allows you to share publicly, or keep your links as a private collection.</p>
-        <p>We also obfuscate the URL and track its use. </p>
-        <p>This will show a full list of all public URLs. People can click or copy. Eventually.</p>
 
-    <table id="public">
+    {% if request.user.is_authenticated %}
+        <h3>All public booksmarks for all users.</h3>
+    {% else %}
+
+        <h3>Bookmark links and easily share them with others</h3>
+            <p>Our system allows you to share publicly, or keep your links as a private collection.</p>
+            <p>We also shorten the URL and track its use for the link owner. </p>
+            <p>Below is a full list of all public links. <a href="{% url 'register_view' %}">Register</a> and <a href="{% url 'login_view' %}">sign in</a> to start your own collection.</p>
+    {% endif %}
+
+     <nav>
+        <ul class="pagination">
+        {% if public_bookmarks.has_previous %}
+            <li>
+                <span><a href="?page={{ public_bookmarks.previous_page_number }}"><span aria-hidden="true">&laquo</span></a></span>
+            </li>
+        {% endif %}
+            <li class="">
+                <span>Page {{ public_bookmarks.number }} of {{ public_bookmarks.paginator.num_pages }}</span>
+            </li>
+        {% if public_bookmarks.has_next %}
+            <li>
+                <span><a href="?page={{ public_bookmarks.next_page_number }}"><span aria-hidden="true">&raquo</span></a></span>
+            </li>
+        {% endif %}
+        </ul>
+    </nav>
+
+    <table class="table table-hover" id="public">
+        <th>Title</th>
+        <th>Link</th>
+        <th>Description</th>
+        <th>Created Time</th>
+        <th>Owner</th>
+        <tbody>
         {% for bookmark in public_bookmarks %}
             <tr>
                 <td>{{ bookmark.title }}</td>
-                <td><a href="{% url 'redirect_view' bookmark.short_code %}">{{ bookmark.short_code }} </a></td>
-                <td>{{ bookmark.description|truncatewords:7 }}</td>
-                <td>created: {{ bookmark.created }}</td>
-                <td>added by: {{ bookmark.url_user }}</td>
+                <td><a href="{% url 'redirect_view' bookmark.short_code %}"> {{ bookmark.short_code }} </a></td>
+                <td>{{ bookmark.description|truncatewords:15 }}</td>
+                <td>{{ bookmark.created }}</td>
+                <td>{{ bookmark.url_user }}</td>
             </tr>
         {% endfor %}
+        </tbody>
     </table>
-
-
-    <ul class="pagination">
-    {% if public_bookmarks.has_previous %}
-        <li>
-            <span><a href="?page={{ public_bookmarks.previous_page_number }}">Previous</a></span>
-        </li>
-    {% endif %}
-        <li class="">
-            <span>Page {{ public_bookmarks.number }} of {{ public_bookmarks.paginator.num_pages }}</span>
-        </li>
-    {% if public_bookmarks.has_next %}
-        <li>
-            <span><a href="?page={{ public_bookmarks.next_page_number }}">Next</a></span>
-        </li>
-    {% endif %}
-    </ul>
-
-{% endblock %}
-{% block pagination %}
-
-<nav>
-  <ul class="pagination">
-    <li class="disabled">
-        <span aria-hidden="true">&laquo</span>
-    </li>
-       <li class="active">
-      <span>1 <span class="sr-only">(current)</span></span>
-    </li>
-       <li class="active">
-      <span>2 <span class="sr-only">(current)</span></span>
-    </li>
-  </ul>
-</nav>
 {% endblock %}

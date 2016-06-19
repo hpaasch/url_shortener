@@ -1,8 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
-from django.http import HttpResponse
-from django.shortcuts import render
+# from django.http import HttpResponse
+# from django.shortcuts import render
 from django.views.generic import RedirectView, TemplateView, CreateView, ListView, UpdateView, DeleteView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from hashids import Hashids
@@ -53,7 +53,7 @@ class RegisterView(CreateView):
     success_url = "/login_view/"
 
 
-class AccountView(ListView):  # can this show a list of URLs?
+class AccountView(ListView):
     model = User
 
     def get_context_data(self, **kwargs):
@@ -79,7 +79,7 @@ class BookmarkCreateView(CreateView):
 class BookmarkUpdate(UpdateView):
     model = Bookmark
     fields = ['url', 'title', 'description']
-    template_name_suffix = '_update_form'  # is this needed?
+    # template_name_suffix = '_update_form'  # is this needed?
     template_name = 'bookmark_update.html'
 
 
@@ -89,17 +89,18 @@ class BookmarkDelete(DeleteView):
 
 # below is dead code so far. i think
 
-class LinkDetailView(TemplateView):
-    template_name = 'auth/user_list.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(LinkDetailView, self).get_context_data(**kwargs)
-        context['author_list'] = Bookmark.objects.all()
-        return context
-
-
-class ClickView(ListView):
-    pass
+# class LinkDetailView(TemplateView):
+#     template_name = 'auth/user_list.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(LinkDetailView, self).get_context_data(**kwargs)
+#         context['author_list'] = Bookmark.objects.all()
+#         return context
+#
+#
+# class ClickView(ListView):
+#     pass
 
 
 
