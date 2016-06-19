@@ -17,5 +17,6 @@ urlpatterns = [
     url(r'^logout_view/$', logout, name='logout_view'),  # logout
     url(r'^(?P<short_code>\w+)/$', views.LinkRedirectView.as_view(), name='redirect_view'),  # redirected and counted
     url(r'^update/(?P<pk>\d+)/$', views.BookmarkUpdate.as_view(), name='update_view'),  # update bookmark
-    url(r'^delete/(?P<pk>\d+)/$', views.BookmarkDelete.as_view(), name='delete_view')  # delete bookmark
+    url(r'^delete/(?P<pk>\d+)/$', views.BookmarkDelete.as_view(), name='delete_view'),  # delete bookmark
+
 ]
