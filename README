@@ -8,6 +8,7 @@ Major new learning includes:
 -- Capturing URLs and redirecting
 -- Counting clicks
 -- Pagination
+-- Tables in templates
 
 
 Required features (plus the "Hard Mode" components of public/private):
