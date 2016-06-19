@@ -5,9 +5,11 @@
 
     {% if request.user.is_authenticated %}
         <h3>All public booksmarks for all users.</h3>
+            <p>Your private booksmarks are visible only on <a href="{% url 'account_view' %}">your page</a>. </p>
+
     {% else %}
 
-        <h3>Bookmark links and easily share them with others</h3>
+        <h3>Save links and easily share them with others</h3>
             <p>Our system allows you to share publicly, or keep your links as a private collection.</p>
             <p>We also shorten the URL and track its use for the link owner. </p>
             <p>Below is a full list of all public links. <a href="{% url 'register_view' %}">Register</a> and <a href="{% url 'login_view' %}">sign in</a> to start your own collection.</p>

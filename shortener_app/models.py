@@ -25,7 +25,7 @@ class Bookmark(models.Model):
 
 class Click(models.Model):
     url = models.ForeignKey(Bookmark)
-    click_time = models.DateTimeField()  # or auto_now?
+    click_time = models.DateTimeField()
 
     class Meta:
         ordering = ['-click_time']

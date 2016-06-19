@@ -7,8 +7,6 @@
     <title>Track-n-Share</title>
     <link rel="stylesheet" href="{% static 'shortener_app/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'shortener_app/css/main.css' %}">
-{#    {% block head %}#}
-{#    {% endblock %}#}
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-static-top">
@@ -26,10 +24,10 @@
             {% endif %}
         </div>
     </nav>
-    <div class="page-header">
+    <div class="container">
+        <div class="page-header">
         <h1>Track-n-Share<small>  Stockpile your favorite links.</small></h1>
     </div>
-    <div class="container">
         {% block content %}
         {% endblock %}
     </div>

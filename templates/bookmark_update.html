@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form action="" method="post">
-{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Update Bookmark" />
-</form>
-
-
+    <h3>Update this bookmark</h3>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Update Bookmark" />
+        </form>
 {% endblock %}

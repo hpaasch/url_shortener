@@ -1,15 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="page-header">
-        <h1>Track 'n' Share<small>  Save your favorite links, shortly.</small></h1>
-    </div>
 
-
-<p>but for now just create a bookmark</p>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="create bookmark" >
-    </form>
+    <h3>Create a bookmark</h3>
+        <p>Public bookmarks are visible to anyone who visits Track-n-Share. </p>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="create bookmark" >
+            </form>
 {% endblock %}

@@ -2,15 +2,11 @@
 
 {% block content %}
 
-<div class="page-header">
-        <h1>Track 'n' Share<small>  Save your favorite links, shortly.</small></h1>
-    </div>
 <h3>Register for an account</h3>
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="create user" >
     </form>
-
 
 {% endblock %}
