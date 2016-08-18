@@ -1,2 +1,5 @@
 .idea/
-url_shortener/shortener_app/__pycache__/
+__pycache__
+.direnv
+*.pyc
+.envrc
