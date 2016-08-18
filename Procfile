@@ -1,1 +1,1 @@
-web: gunicorn prez_party.wsgi
+web: gunicorn url_shortener.wsgi
