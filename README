@@ -1,3 +1,5 @@
+This project is deployed on Heroku: https://track-n-share.herokuapp.com/
+
 This application is a simplified replication of bit.ly, but geared toward those
 who want to track the clicks on their shared URLs. As implemented, this app
 allows the user to create a bookmark as public or private. All public bookmarks
