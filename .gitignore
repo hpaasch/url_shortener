@@ -3,3 +3,4 @@ __pycache__
 .direnv
 *.pyc
 .envrc
+db.sqlite3
